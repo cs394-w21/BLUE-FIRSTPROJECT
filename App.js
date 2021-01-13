@@ -8,6 +8,7 @@ export default function App() {
       <h1>CharityMatch</h1>
       <img src={require('./charity.jpg')} />
       <Text>Isaac's Commit</Text>
+      <Text>David's Commit</Text>
       <Text style={styles.shadow}>Xunchuan's Commit</Text>
       <StatusBar style="auto" />
     </View>
