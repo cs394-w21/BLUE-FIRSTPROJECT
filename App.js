@@ -5,6 +5,8 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
+      <h1>CharityMatch</h1>
+      <img src={require('./charity.jpg')} />
       <Text>Isaac's Commit</Text>
       <Text style={styles.shadow}>Xunchuan's Commit</Text>
       <StatusBar style="auto" />
