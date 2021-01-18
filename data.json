@@ -1,0 +1,28 @@
+{
+    "charities": {
+        "1": {
+            "name":"Compass to Care",
+            "distance": "10 miles",
+            "description": "A charity1",
+            "tags": ["Food", "Shoes"]
+        },
+        "2": {
+            "name":"Compass",
+            "distance": "2 miles",
+            "description": "A charity2",
+            "tags": ["Clothes"]
+        },
+        "3": {
+            "name":"Care",
+            "distance": "7 miles",
+            "description": "A charity3",
+            "tags": ["Toys"]
+        },
+        "4": {
+            "name":"Care2",
+            "distance": "12 miles",
+            "description": "A charity4",
+            "tags": []
+        }
+    }
+}

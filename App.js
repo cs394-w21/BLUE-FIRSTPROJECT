@@ -1,15 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import CharityList from './components/CharityList';
+import getCharities from './utils/charities';
+import CharityCell from './components/CharityCell';
+import Filter from './components/Filter';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <h1>CharityMatch</h1>
-      <img src={require('./charity.jpg')} />
-      <Text>Isaac's Commit</Text>
-      <Text>David's Commit</Text>
-      <Text style={styles.shadow}>Xunchuan's Commit</Text>
+      
+      <ScrollView>
+        <CharityList charities={getCharities()}/>
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
