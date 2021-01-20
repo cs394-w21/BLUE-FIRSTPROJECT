@@ -3,25 +3,25 @@
         "1": {
             "name":"Compass to Care",
             "distance": "10 miles",
-            "description": "A charity1",
+            "description": "Compass to Care Childhood Cancer Foundation helps children with cancer travel to hospitals for cancer treatment.",
             "tags": ["Food", "Shoes"]
         },
         "2": {
-            "name":"Compass",
+            "name":"Goodwill Store & Donation Center",
             "distance": "2 miles",
-            "description": "A charity2",
-            "tags": ["Clothes"]
+            "description": "Goodwill takes gently used items in good condition for resale. Proceeds go towards community programs.",
+            "tags": ["Clothes", "Shoes"]
         },
         "3": {
-            "name":"Care",
+            "name":"Salvation Army",
             "distance": "7 miles",
-            "description": "A charity3",
-            "tags": ["Toys"]
+            "description": "The Salvation Army is a faith-based organization whose proceeds and donations go to supporting those in need locally.",
+            "tags": ["Toys", "Food"]
         },
         "4": {
-            "name":"Care2",
+            "name":"Peter's Dog Shelter",
             "distance": "12 miles",
-            "description": "A charity4",
+            "description": "A local dog shelter located in the northwest Chicago suburbs. Seeking volunteers.",
             "tags": []
         }
     }
