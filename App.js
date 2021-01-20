@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, SafeAreaView } from 'react-native';
 import CharityList from './components/CharityList';
 import getCharities from './utils/charities';
 import CharityCell from './components/CharityCell';
@@ -8,14 +8,13 @@ import Filter from './components/Filter';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <h1>CharityMatch</h1>
-      
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.bannerStyle}>CharityMatch</Text>
       <ScrollView>
         <CharityList charities={getCharities()}/>
       </ScrollView>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -26,15 +25,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  shadow: {
-    
-    color: '#000',
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 600,    
-    fontSize: "2.5rem",
-    textShadowColor: 'rgba(0, 0, 0, 0.2)',
-    textShadowOffset: { width: 3, height: 4 },
-    textShadowRadius: 1,
-    letterSpacing: 5,
-  }
+  bannerStyle: {
+    color: '#888',
+    fontSize: 32,
+    paddingTop: 50,
+    paddingBottom: 20,
+  },
+  // shadow: {
+  //   color: '#000',
+  //   fontFamily: 'Roboto, sans-serif',
+  //   fontWeight: 600,    
+  //   fontSize: "2.5rem",
+  //   textShadowColor: 'rgba(0, 0, 0, 0.2)',
+  //   textShadowOffset: { width: 3, height: 4 },
+  //   textShadowRadius: 1,
+  //   letterSpacing: 5,
+  // }
 });

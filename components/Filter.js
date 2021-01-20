@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Button, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import FilterCell from './FilterCell'
 const tags = ["Food", "Clothes", "Shoes", "Toys"]
 const Filter = ({tagFilter, setTagFilter}) => {
@@ -12,15 +12,26 @@ const Filter = ({tagFilter, setTagFilter}) => {
             setTagFilter([...tagFilter, tag])
         }
     }  
-    return (<View style={styles.Filter}>
-        {tags.map(tag => <FilterCell key={tag} tag={tag} toggleTag={toggleTag}/> ) }
-
-    </View>)
+    return (
+        <ScrollView>
+            <View style={styles.Filter}>
+                {tags.map(tag => <FilterCell key={tag} tag={tag} toggleTag={toggleTag}/> ) }
+            </View>
+        </ScrollView>
+    )
 };
 
 const styles = StyleSheet.create({
     Filter: {
-        backgroundColor: "#FF0000"
+        flex: 1,
+        borderRadius: 5,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
+        width: 400,
+        // backgroundColor: "#05a8ad",
+        backgroundColor: "#9de3fa",
+        flexDirection: "row",
     },
 })
 

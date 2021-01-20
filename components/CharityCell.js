@@ -1,23 +1,35 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 
 const CharityCell = ({name, distance, description}) => (
-    <View style={styles.CharityCell}>
-        <Text>
-            {name}
-        </Text>
-        <Text>
-            {distance}
-        </Text>
-        <Text>
-            {description}
-        </Text>
-    </View>
+    <ScrollView>
+        <View style={styles.CharityCell}>
+            <Text style={styles.CharityTitle}>{name}</Text>
+            <Text style={styles.CharityDistance}>{distance}</Text>
+            <Text style={styles.CharityDescription}>{description}</Text>
+        </View>
+    </ScrollView>  
 );
   
 const styles = StyleSheet.create({
     CharityCell: {
-        backgroundColor: "#FF0000"
+        flex: 1,
+        borderRadius: 5,
+        marginTop: 5,
+        marginBottom: 5,
+        padding: 10,
+        width: 400,
+        backgroundColor: "#c0f8fa",
+    },
+    CharityTitle: {
+        fontSize: 24,
+    },
+    CharityDistance: {
+        fontSize: 20,
+        fontWeight: "bold",
+    },
+    CharityDescription: {
+        fontSize: 20,
     },
 })
 
