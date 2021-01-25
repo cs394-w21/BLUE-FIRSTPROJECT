@@ -1,14 +1,26 @@
-import data from '../data.json'
+/*
+Utility Functions for Charities
+*/
 
-function getCharities() {
-    let charities = []
-    console.log(data.charities)
-    for (const id in data.charities) {
-        charities.push(data["charities"][id])
+// Formats charities as an array of objects
+// Takes in firebase snapshot of the charities (an object)
+function formatCharities(snapshot) {    
+    let formattedCharities = Object.values(snapshot);
 
-    }
-    console.log(charities)
-    return charities
+    // Adds empty array to 'tags' property if missing from initial charity object
+    formattedCharities = formattedCharities.map(charity => {
+        if (!charity.hasOwnProperty('tags')) {
+            return {...charity, tags: []}
+        }
+        else return charity;
+    })
+
+    return formattedCharities;
 }
 
-export default getCharities;
+// Filter charities based on whether it contains the selected tags
+function filterCharities(charities, selectedTags) {
+    return charities.filter(charity => charity.tags.some(tag => selectedTags.includes(tag)))
+}
+
+export { formatCharities, filterCharities };
