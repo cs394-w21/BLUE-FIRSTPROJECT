@@ -1,16 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import CharityList from '../components/CharityList';
-import getCharities from '../utils/charities';
+
 
 export default function CharityScreen() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
         <Text style={styles.bannerStyle}>CharityMatch</Text>
-          <CharityList charities={getCharities()}/>
+          <CharityList/>
         <StatusBar style="auto" />
-    </ScrollView>
+    </View>
   );
 };
 
