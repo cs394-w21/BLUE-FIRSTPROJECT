@@ -9,18 +9,32 @@ function formatCharities(snapshot) {
 
     // Adds empty array to 'tags' property if missing from initial charity object
     formattedCharities = formattedCharities.map(charity => {
+        let charityFormatted = charity;
+
         if (!charity.hasOwnProperty('tags')) {
-            return {...charity, tags: []}
+            charityFormatted = {...charityFormatted, tags: []}
         }
-        else return charity;
+        if (!charity.hasOwnProperty('items')) {
+            charityFormatted = {...charityFormatted, items: []}
+        }
+        return charityFormatted;
     })
 
     return formattedCharities;
 }
 
+// function filterByTag(charity, selectedTags) {
+//     return selectedTags.every(tag => charity.tags.includes(tag))
+// }
+
 // Filter charities based on whether it contains the selected tags
-function filterCharities(charities, selectedTags) {
-    return charities.filter(charity => charity.tags.some(tag => selectedTags.includes(tag)))
+function filterCharities(charities, selectedTags, searchItems) {
+    console.log(searchItems)
+    let filteredCharities = charities.filter(charity => charity.tags.some(tag => selectedTags.includes(tag)));
+    if (searchItems !== '') {
+        filteredCharities = filteredCharities.filter(charity => charity.items.includes(searchItems));
+    }
+    return filteredCharities
 }
 
 export { formatCharities, filterCharities };

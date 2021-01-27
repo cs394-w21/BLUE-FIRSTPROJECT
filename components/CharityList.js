@@ -4,11 +4,13 @@ import CharityCell from './CharityCell'
 import Filter from './Filter'
 import { formatCharities, filterCharities } from '../utils/charities';
 import { firebase } from '../utils/firebase';
+import SearchInput from './SearchInput';
 
 const CharityList = () => {
     const [charityList, setCharityList] = useState([]);
     const [tagFilter, setTagFilter] = useState([]);
-    const [filteredCharities, setFilteredCharities] = useState([]);    
+    const [filteredCharities, setFilteredCharities] = useState([]);
+    const [searchItems, setSearchItems] = useState([]);    
 
     // First useEffect fetches the data from firebase when this component first mounts
     useEffect(() => {
@@ -35,14 +37,17 @@ const CharityList = () => {
     // Second useEffect updates the displayed charities based on selected tags in tagFilter
     useEffect(() => {
         if (tagFilter.length > 0) {
-            setFilteredCharities(filterCharities(charityList, tagFilter));
+            if (searchItems) {
+                setFilteredCharities(filterCharities(charityList, tagFilter, searchItems));
+            }
         } else {
             setFilteredCharities(charityList);
         }
-    }, [charityList, tagFilter])
+    }, [charityList, tagFilter, searchItems])
 
     return (        
-        <ScrollView stickyHeaderIndices={[0]}>            
+        <ScrollView stickyHeaderIndices={[0]}>
+            <SearchInput setSearchItems={setSearchItems}/>            
             <Filter style={styles.tagFilter} tagFilter={tagFilter} setTagFilter={setTagFilter}/>            
             <View style={styles.CharityList}>
                 {filteredCharities.length > 0 
