@@ -48,8 +48,10 @@ const CharityList = () => {
     }
     return (        
         <ScrollView stickyHeaderIndices={[0]}>
-            <SearchInput setSearchItems={updateSearchText}/>            
-            <Filter style={styles.tagFilter} tagFilter={tagFilter} setTagFilter={setTagFilter}/>            
+            <View style={styles.filterContainer}>
+                <SearchInput style={styles.search} setSearchItems={updateSearchText}/>            
+                <Filter style={styles.tagFilter} tagFilter={tagFilter} setTagFilter={setTagFilter}/>
+            </View>                        
             <View style={styles.CharityList}>
                 {filteredCharities.length > 0 
                     ? filteredCharities.map(charity => <CharityCell key={charity.name} name={charity.name} description={charity.description} distance={charity.distance} />) 
@@ -67,7 +69,15 @@ const styles = StyleSheet.create({
         width: 400,
         justifyContent: "center",
         alignItems: "center",
-    }    
+    },
+    filterContainer: {
+        borderRadius: 5,
+        justifyContent: "center",
+        alignItems: "center",   
+        padding: 20,
+        width: 400,        
+        backgroundColor: "#9de3fa",
+    },   
 })
 
 export default CharityList;

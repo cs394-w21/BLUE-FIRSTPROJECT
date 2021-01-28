@@ -25,6 +25,7 @@ function formatCharities(snapshot) {
 
 // Filter charities based on whether it contains the selected tags
 function filterCharities(charities, selectedTags, searchItems) {
+    searchItems = searchItems.toLowerCase(); // converts user text input to all lowercase
     let filteredCharities = charities
 
     if (selectedTags.length > 0) {

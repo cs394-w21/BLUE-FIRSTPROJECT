@@ -23,14 +23,7 @@ const Filter = ({tagFilter, setTagFilter}) => {
 
 const styles = StyleSheet.create({
     Filter: {
-        flex: 1,
-        borderRadius: 5,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 20,
-        width: 400,
-        // backgroundColor: "#05a8ad",
-        backgroundColor: "#9de3fa",
+        flex: 1,          
         flexDirection: "row",
     },
 })
