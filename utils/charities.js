@@ -42,4 +42,10 @@ function filterCharities(charities, selectedTags, searchItems) {
     return filteredCharities
 }
 
-export { formatCharities, filterCharities };
+// Sort list of charities in order of increasing distance
+function sortCharitiesByDistance(charities) {
+    // parseInt will get the distance number from the distance property in a charity
+    return charities.sort((charityA, charityB) => (parseInt(charityA.distance) > parseInt(charityB.distance)) ? 1 : -1);
+}
+
+export { formatCharities, filterCharities, sortCharitiesByDistance };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {ScrollView, StyleSheet, Text, View } from 'react-native';
 import CharityCell from './CharityCell'
 import Filter from './Filter'
-import { formatCharities, filterCharities } from '../utils/charities';
+import { formatCharities, filterCharities, sortCharitiesByDistance } from '../utils/charities';
 import { firebase } from '../utils/firebase';
 import SearchInput from './SearchInput';
 
@@ -44,7 +44,8 @@ const CharityList = () => {
         updateCharityList()
     }
     function updateCharityList() {
-        setFilteredCharities(filterCharities(charityList, tagFilter, searchItems));
+        const filtered = filterCharities(charityList, tagFilter, searchItems); // filter charities
+        setFilteredCharities(sortCharitiesByDistance(filtered)); // sort by distance
     }
     return (        
         <ScrollView stickyHeaderIndices={[0]}>
