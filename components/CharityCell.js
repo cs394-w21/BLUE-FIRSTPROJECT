@@ -1,12 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 
-const CharityCell = ({name, distance, description}) => (
+const CharityCell = ({charity, toggleFavorite}) => (
     <ScrollView>
         <View style={styles.CharityCell}>
-            <Text style={styles.CharityTitle}>{name}</Text>
-            <Text style={styles.CharityDistance}>{distance}</Text>
-            <Text style={styles.CharityDescription}>{description}</Text>
+            <TouchableOpacity onPress={() => toggleFavorite(charity)}>
+                <Text>Favorite</Text>
+            </TouchableOpacity>
+            <Text style={styles.CharityTitle}>{charity.name}</Text>
+            <Text style={styles.CharityDistance}>{charity.distance}</Text>
+            <Text style={styles.CharityDescription}>{charity.description}</Text>
         </View>
     </ScrollView>  
 );

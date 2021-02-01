@@ -11,6 +11,8 @@ const CharityList = () => {
     const [tagFilter, setTagFilter] = useState([]);
     const [filteredCharities, setFilteredCharities] = useState([]);
     const [searchItems, setSearchItems] = useState("");    
+    const [favorites, setFavoriteCharities] = useState([]);
+
 
     // First useEffect fetches the data from firebase when this component first mounts
     useEffect(() => {
@@ -39,6 +41,45 @@ const CharityList = () => {
         updateCharityList()
     }, [charityList, tagFilter, searchItems])
 
+    function toggleFavorite(charity) {
+
+        const db = firebase.database().ref('users/1/favorites');
+
+        const handleData = snap => {
+            if (snap.val()) {
+                console.log(snap.val());
+                let newFavorites = [];     
+                
+                
+                // setFavoriteCharities(newFavorites);
+                // console.log(favorites) 
+                for (var id in snap.val()) {
+                    newFavorites.push(id)
+                }
+                setFavoriteCharities(newFavorites);
+                if (favorites && favorites.includes(charity.id)) {
+                    if (favorites.length > 1) {
+                        setFavoriteCharities(favorites.slice(favorites.indexOf(charity.id), 1).map)
+                    } else {
+                        setFavoriteCharities([])
+                    }
+                    db.equalTo(charity.id).ref.remove()
+                } else {
+                    setFavoriteCharities([...favorites, charity.id])
+                    console.log(2)
+                    db.push(charity.id)
+                }  
+                console.log(favorites)
+                // let favRef = 
+                               
+            } else {
+                db.push(charity.id)
+            }
+        }
+
+        db.once('value', handleData, error => alert(error));
+    }
+
     function updateSearchText(text) {
         setSearchItems(text)
         updateCharityList()
@@ -55,7 +96,7 @@ const CharityList = () => {
             </View>                        
             <View style={styles.CharityList}>
                 {filteredCharities.length > 0 
-                    ? filteredCharities.map(charity => <CharityCell key={charity.name} name={charity.name} description={charity.description} distance={charity.distance} />) 
+                    ? filteredCharities.map(charity => <CharityCell key={charity.name} charity={charity} toggleFavorite={toggleFavorite} />) 
                     : <Text>"No Charities found"</Text>}
             </View>                       
         </ScrollView>                
