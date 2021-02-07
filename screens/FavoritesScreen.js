@@ -1,14 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
-import CharityList from '../components/CharityList';
-import getCharities from '../utils/charities';
+import FavoritesList from '../components/FavoritesList'
 
 export default function FavoritesScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.bannerStyle}>Favorites</Text>
-        <StatusBar style="auto" />
+        <FavoritesList/>
     </ScrollView>
   );
 };

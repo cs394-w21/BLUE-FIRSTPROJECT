@@ -11,6 +11,8 @@ const CharityList = () => {
     const [tagFilter, setTagFilter] = useState([]);
     const [filteredCharities, setFilteredCharities] = useState([]);
     const [searchItems, setSearchItems] = useState("");    
+    const [favorites, setFavoriteCharities] = useState([]);
+
 
     // First useEffect fetches the data from firebase when this component first mounts
     useEffect(() => {
@@ -39,6 +41,69 @@ const CharityList = () => {
         updateCharityList()
     }, [charityList, tagFilter, searchItems])
 
+
+    // Third useEffect loads the initial favorites from database
+    useEffect(() => {
+        const db = firebase.database().ref('users/1/favorites');
+
+        const handleData = snap => {
+            if (snap.val()) {
+                
+                const currentFavorites = Object.values(snap.val());                
+                setFavoriteCharities(currentFavorites);                      
+            }
+        }
+
+        db.on('value', handleData, error => alert(error)); 
+
+        
+        
+    }, [])
+
+    function toggleFavorite(charity) {   
+          
+
+        const db = firebase.database().ref('users/1/favorites');
+        
+
+        const handleData = snap => {
+            if (snap.val()) {       
+                const currentFavoritesObject = snap.val();
+
+                if (favorites && favorites.includes(charity.id)) {                    
+                    
+                    for (var key in currentFavoritesObject) {
+                        if (currentFavoritesObject[key] === charity.id) {
+                            delete currentFavoritesObject[key];
+                        }
+                    }                   
+                    const removedExisting = favorites.filter(id => {
+                        return id !== charity.id;
+                    })
+                    setFavoriteCharities(removedExisting);
+                    
+
+                    const updatedFirebaseObject = {... currentFavoritesObject};
+                    
+                    db.set(updatedFirebaseObject);
+                } else {                    
+                    setFavoriteCharities([...favorites, charity.id])
+                    
+                    db.push(charity.id)
+                }       
+                               
+            } else {                
+                db.push(charity.id);
+                setFavoriteCharities([charity.id]);
+                
+            }
+        }
+
+        db.once('value', handleData, error => alert(error));
+
+        
+    }
+
     function updateSearchText(text) {
         setSearchItems(text)
         updateCharityList()
@@ -55,7 +120,7 @@ const CharityList = () => {
             </View>                        
             <View style={styles.CharityList}>
                 {filteredCharities.length > 0 
-                    ? filteredCharities.map(charity => <CharityCell key={charity.name} name={charity.name} description={charity.description} distance={charity.distance} />) 
+                    ? filteredCharities.map(charity => <CharityCell key={charity.name} charity={charity} toggleFavorite={toggleFavorite} />) 
                     : <Text>"No Charities found"</Text>}
             </View>                       
         </ScrollView>                
@@ -78,6 +143,11 @@ const styles = StyleSheet.create({
         padding: 20,
         width: 400,        
         backgroundColor: "#9de3fa",
+        borderColor: '#0a9fd1',
+        borderWidth: 1,
+        shadowColor: 'rgba(0, 0, 0, 0.2)',
+        shadowOffset: {width: 0, height: 3},
+        shadowRadius: 5
     },   
 })
 
