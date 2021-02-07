@@ -29,7 +29,7 @@ function filterCharities(charities, selectedTags, searchItems) {
     let filteredCharities = charities
 
     if (selectedTags.length > 0) {
-        filteredCharities = charities.filter(charity => {return selectedTags.every(tag => charity.tags.includes(tag))});
+        filteredCharities = charities.filter(charity => {return selectedTags.some(tag => charity.tags.includes(tag))});
     }
 
     if (searchItems && searchItems.length > 0) {
@@ -48,4 +48,10 @@ function sortCharitiesByDistance(charities) {
     return charities.sort((charityA, charityB) => (parseInt(charityA.distance) > parseInt(charityB.distance)) ? 1 : -1);
 }
 
-export { formatCharities, filterCharities, sortCharitiesByDistance };
+// Get list of favoritied charities from favorited ids
+function filterFavoritedCharities(charities, favoriteIDs) {    
+    const favoritedCharities = charities.filter(charity => favoriteIDs.includes(charity.id));    
+    return favoritedCharities;    
+}
+
+export { formatCharities, filterCharities, sortCharitiesByDistance, filterFavoritedCharities };

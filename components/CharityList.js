@@ -41,43 +41,67 @@ const CharityList = () => {
         updateCharityList()
     }, [charityList, tagFilter, searchItems])
 
-    function toggleFavorite(charity) {
 
+    // Third useEffect loads the initial favorites from database
+    useEffect(() => {
         const db = firebase.database().ref('users/1/favorites');
 
         const handleData = snap => {
             if (snap.val()) {
-                console.log(snap.val());
-                let newFavorites = [];     
                 
-                
-                // setFavoriteCharities(newFavorites);
-                // console.log(favorites) 
-                for (var id in snap.val()) {
-                    newFavorites.push(id)
-                }
-                setFavoriteCharities(newFavorites);
-                if (favorites && favorites.includes(charity.id)) {
-                    if (favorites.length > 1) {
-                        setFavoriteCharities(favorites.slice(favorites.indexOf(charity.id), 1).map)
-                    } else {
-                        setFavoriteCharities([])
-                    }
-                    db.equalTo(charity.id).ref.remove()
-                } else {
+                const currentFavorites = Object.values(snap.val());                
+                setFavoriteCharities(currentFavorites);                      
+            }
+        }
+
+        db.on('value', handleData, error => alert(error)); 
+
+        
+        
+    }, [])
+
+    function toggleFavorite(charity) {   
+          
+
+        const db = firebase.database().ref('users/1/favorites');
+        
+
+        const handleData = snap => {
+            if (snap.val()) {       
+                const currentFavoritesObject = snap.val();
+
+                if (favorites && favorites.includes(charity.id)) {                    
+                    
+                    for (var key in currentFavoritesObject) {
+                        if (currentFavoritesObject[key] === charity.id) {
+                            delete currentFavoritesObject[key];
+                        }
+                    }                   
+                    const removedExisting = favorites.filter(id => {
+                        return id !== charity.id;
+                    })
+                    setFavoriteCharities(removedExisting);
+                    
+
+                    const updatedFirebaseObject = {... currentFavoritesObject};
+                    
+                    db.set(updatedFirebaseObject);
+                } else {                    
                     setFavoriteCharities([...favorites, charity.id])
-                    console.log(2)
+                    
                     db.push(charity.id)
-                }  
-                console.log(favorites)
-                // let favRef = 
+                }       
                                
-            } else {
-                db.push(charity.id)
+            } else {                
+                db.push(charity.id);
+                setFavoriteCharities([charity.id]);
+                
             }
         }
 
         db.once('value', handleData, error => alert(error));
+
+        
     }
 
     function updateSearchText(text) {
@@ -119,6 +143,11 @@ const styles = StyleSheet.create({
         padding: 20,
         width: 400,        
         backgroundColor: "#9de3fa",
+        borderColor: '#0a9fd1',
+        borderWidth: 1,
+        shadowColor: 'rgba(0, 0, 0, 0.2)',
+        shadowOffset: {width: 0, height: 3},
+        shadowRadius: 5
     },   
 })
 
