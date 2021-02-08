@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     CharityList: {
         flex: 1,
         padding: 20,
-        width: 400,
+        width: 450,
         justifyContent: "center",
         alignItems: "center",
         textAlign: 'left'

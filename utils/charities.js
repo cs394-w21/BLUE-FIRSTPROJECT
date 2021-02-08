@@ -34,8 +34,20 @@ function filterCharities(charities, selectedTags, searchItems) {
 
     if (searchItems && searchItems.length > 0) {
         filteredCharities = filteredCharities.filter(charity => {
-            return charity.items.some(item => {
-                return item.includes(searchItems)
+            var searchTerms = [charity.name, charity.description]
+            if (charity.tags) {
+                searchTerms.push(...charity.tags)
+            }
+            if (charity.items) {
+                searchTerms.push(...charity.items)
+            }
+
+            searchTerms = searchTerms.filter(function(x) {
+                return x !== undefined;
+             })
+
+            return searchTerms.some(item => {
+                return item.toLowerCase().includes(searchItems.toLowerCase())
             })
         });
     }
