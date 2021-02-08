@@ -8,7 +8,7 @@ const SearchInput = ({setSearchItems}) => {
             <FontAwesome5 style={styles.searchIcon} name={'search'} size={17}></FontAwesome5>
             <TextInput 
                 style={styles.searchBar}
-                placeholder='Search items'
+                placeholder='Search items, charities, descriptions'
                 outline 
                 onChangeText={(value) => 
                     setSearchItems(value)
