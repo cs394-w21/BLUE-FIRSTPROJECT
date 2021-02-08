@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     CharityList: {
         flex: 1,
         padding: 20,
-        width: 400,
+        width: 425,
         justifyContent: "center",
         alignItems: "center",
     },
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",   
         padding: 20,
-        width: 400,        
+        width: 425,        
         backgroundColor: "#9de3fa",
         borderColor: '#0a9fd1',
         borderWidth: 1,

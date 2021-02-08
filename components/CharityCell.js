@@ -37,15 +37,15 @@ const CharityCell = ({charity, toggleFavorite}) => {
                             : <FontAwesome5 style={styles.starIcon} name={'star'} size={20}></FontAwesome5>}                        
                     </TouchableOpacity>
                 </View>
-                <View>
+                <View style={styles.CharityDistanceContainer}>
                     <Text style={styles.CharityDistance}>{charity.distance}</Text>
                 </View>            
-                <View>
+                <View style={styles.CharityDescriptionContainer}>
                     <Text style={styles.CharityDescription}>{charity.description}</Text>
                 </View>
-                <View>
-                    <Text>Needs: {charity.items.length > 0 ? charity.items.map((item, index) => 
-                        <Text>{item.split(' ').map(item => item.charAt(0).toUpperCase() + item.slice(1)).join(' ') + (index < (charity.items.length - 1) ? ', ' : '')}</Text>
+                <View style={styles.CharityNeedsContainer}>
+                    <Text style={styles.CharityNeeds}>Needs: {charity.items.length > 0 ? charity.items.map((item, index) => 
+                        <Text style={styles.CharityNeedItem}>{item.split(' ').map(item => item.charAt(0).toUpperCase() + item.slice(1)).join(' ') + (index < (charity.items.length - 1) ? ', ' : '')}</Text>
                     ) : "Nothing specific"}</Text>
                 </View>
                 <View style={styles.ArrowContainer}>
@@ -67,27 +67,48 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
         padding: 15,
-        width: 400,
-        height: 250,
+        width: 425,
+        height: 225,                        
         backgroundColor: "#c0f8fa",
     },
     CharityHeader: {
-        flex: 1,
+        flex: 0.25,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    CharityTitle: {
-        fontSize: 24,
+    CharityDistanceContainer: {
+        flex: 0.25,                
+    },
+    CharityDescriptionContainer: {
+        flex: 0.55
+    },
+    CharityNeedsContainer: {
+        flex: 0.2,
+        width: '90%'
+    },
+    CharityTitle: {        
+        fontSize: 22,
+        fontWeight: 600
     },
     CharityDistance: {
-        fontSize: 20,
-        fontWeight: "bold",
+        fontSize: 18,
+        fontWeight: 500,
+        color: '#505050'
     },
     CharityDescription: {
-        fontSize: 20,
+        fontSize: 17,
+        fontWeight: 300
     },
-    ArrowContainer:{
-        flex: 1,
+    CharityNeeds: {
+        fontSize: 16,
+        fontWeight: 500,        
+    },
+    CharityNeedItem: {
+        fontSize: 15,
+        fontWeight: 400,        
+    },
+    ArrowContainer:{        
+        flex: 0.1,
         flexDirection: "row",
         justifyContent: "flex-end",
     },
